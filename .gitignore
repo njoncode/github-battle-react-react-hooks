@@ -1,0 +1,5 @@
+node_modules
+# .DS_Store:  On Mac
+.DS_Store
+#  dist: we can generate our dist code whenever we need to.
+dist

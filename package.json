@@ -4,7 +4,19 @@
   "description": "github battle with react hooks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server",
+    "build": "NODE_ENV='production' webpack",
+    "build-for-windows": "SET NODE_ENV='production' && webpack"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "syntax-dynamic-import"
+    ]
   },
   "repository": {
     "type": "git",
@@ -19,5 +31,51 @@
   "bugs": {
     "url": "https://github.com/njoncode/github-battle-react-react-hooks/issues"
   },
-  "homepage": "https://github.com/njoncode/github-battle-react-react-hooks#readme"
+  "homepage": "https://github.com/njoncode/github-battle-react-react-hooks#readme",
+  "dependencies": {
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "query-string": "^6.14.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "peerDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-html": "^6.1.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "prettier": "^2.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-wesbos": "^1.0.1",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^5.0.0",
+    "prettier": "^2.2.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.21.1",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  }
 }
