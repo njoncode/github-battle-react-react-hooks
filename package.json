@@ -1,0 +1,23 @@
+{
+  "name": "github-battle-react-react-hooks",
+  "version": "1.0.0",
+  "description": "github battle with react hooks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njoncode/github-battle-react-react-hooks.git"
+  },
+  "keywords": [
+    "react",
+    "hooks"
+  ],
+  "author": "njoncode",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/njoncode/github-battle-react-react-hooks/issues"
+  },
+  "homepage": "https://github.com/njoncode/github-battle-react-react-hooks#readme"
+}
