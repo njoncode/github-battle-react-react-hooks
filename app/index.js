@@ -1,44 +1,72 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Popular from './components/Popular';
+import Battle from './components/Battle';
+import Results from './components/Results';
+import Nav from './components/Nav';
+import { ThemeProvider } from './contexts/theme';
 
-/*
-  The dynamic-import-syntax allows us import modules dynamically.
-  Reactlazy allows us to render a dynamic import just as a regular component.
-  So we combine those two ideas, we create these regular components, pass those as components to React Routers Route component.
-  And now Popular won't be loaded until we are at the Popular path,
-  Battle won't be loaded until we are at '/Battle' & 
-  Results won't be loaded until we are at '/Battle/Results'.
+function App() {
+  const [theme, setTheme] = React.useState('light');
 
-  So using dynamic import syntax, React.lazy & React.Suspense, we can delay importing a specific module & all of the modules 
-  that that module depends on, until the user actually needs that code.
+  const toggleTheme = () => {
+    setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
+  };
 
-*/
-
-// We can write components like this. Instead of having a constructor, we can add properties to our state just by having the syntax right here.
-// Arrow function methods allow the components to prevent having to bind the method in the constructor.
-class App extends React.Component {
-  /**
-   * We are updating the current state based on the previous state, so we pass a function to the setSate.
-   * If the theme is light, then we we are gonna change it to dark and vice-versa.
-   */
-
-  render() {
-    return <div>REACT APP: via hookss</div>;
-  }
+  return (
+    <Router>
+      <ThemeProvider value={theme}>
+        <div className={theme}>
+          {/* // classname will be set based on the theme. if theme is dark, then
+          className will be dark and so dark color (from CSS) */}
+          <Nav toggleTheme={toggleTheme} />
+          <Switch>
+            <Route exact path="/" component={Popular} />
+            <Route exact path="/battle" component={Battle} />
+            <Route path="/battle/results" component={Results} />
+            <Route render={() => <h1>404</h1>} />
+            {/**
+             * We will wrap all of our routes/components inside of the switch component. 
+             * If we leave of the path, then this route is always gonna render.   
+               //  <Route render={() => <h1>404</h1>} />
+              Here, we have left of the path, so this route is always gonna render. So we are wrapping evertyhing in a switch, this will only render if none of the
+               above 3 routes match. 
+             * Switch will make sure that only the first path that matches, only that componet is rendered.
+             * If we have two routes that both match, only render the first one.
+          
+            */}
+          </Switch>
+        </div>
+      </ThemeProvider>
+    </Router>
+  );
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
-/*
- <Route Path='/' component={Popular} />    
-    Whenever the user is at the index page, the component we want to render is the Popular Component.
-              
- <Route Path='/battle' component={Battle} />  
-    Whenever the user is at Battle, the component that we want the react router to render is the Battle component.
-              
-*/
+/**
+    Router
+    
+ * When the app’s location matches a certain path, Route will render a specified component, when it doesn’t, it will render null. 
+   So say for example we had a Home component that we wanted to render when our app was at the index path /
+        
+              <Route path='/' component={Home} />
 
-/* 
-  exact prop allows us to render only the Popular component when we are exactly on the home page no other nested pages. 
-*/
+  If we were at the index page (/), we would see the Home component. If we weren’t, we wouldn’t see anything (because Route would have rendered null).
+
+      *      <Route path='/' component={Home} />
+             <Route path='/about' component={About} />
+  
+  One caveat -  if we run the app and we head to the /about path, we’ll notice that both the About component and the Home component are rendered. This is because even though / doesn’t match the location exactly, it’s still considered a partial match so the Home component is rendered. 
+  To get around this, we simply need to add an exact prop to the / Route to specify that we only want it to match when the location matches exactly.
+
+            <Route exact path="/" component={Home}/>
+            <Route path="/about" component={About}/>
+   
+
+
+ * 
+ * 
+ */
